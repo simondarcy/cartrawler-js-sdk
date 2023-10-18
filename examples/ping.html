@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Ping Demo</title>
+  </head>
+  <body>
+    <script src="https://sdk.ct-demos.com/cartrawler.js"></script>
+    <script>
+      let params = {'message':'Hello World', 'debug':true}
+      CarTrawler.ping(params).then((data) => {
+        if (data.hasOwnProperty('error')){
+          console.log('error: '+data.error)
+        }
+        else{
+          console.log("resolved: ", data.EchoData);
+        }
+      });
+    </script>
+  </body>
+</html>

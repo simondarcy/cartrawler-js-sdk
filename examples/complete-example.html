@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Complete Example</title>
+ 
+    <style type="text/css">
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,500,600,700,800,900');
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    font-family: 'Roboto', sans-serif;
+}
+.loader {
+    width: 48px;
+    height: 48px;
+    border: 5px solid #FFF;
+    border-bottom-color: #00d3a7;
+    border-radius: 50%;
+    display: inline-block;
+    box-sizing: border-box;
+    animation: rotation 1s linear infinite;
+}
+@keyframes rotation {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+} 
+#widget{
+    color:#000000;
+    margin: 1rem auto;
+    max-width: 900px;
+    text-align: center;
+}
+h3.heading{
+    margin-bottom: 1rem;
+}
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    height: auto;
+}
+.item {
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: column;
+    padding: 1rem;
+    border-radius: 10px;
+    text-align: center;
+    width: 100%;
+    padding-bottom: 1rem;
+    cursor: pointer;
+    margin-bottom: 1rem; 
+    border:1px solid rgb(229, 229, 229);
+    box-shadow: none;
+    transition: box-shadow 200ms ease-in-out, transform 200ms ease-in-out, -webkit-transform 200ms ease-in-out
+}
+a{
+    color:#000;
+    text-decoration: none;
+}
+img.car{
+    width: 80%;
+}
+img.supplier-logo{
+    width: 60px;
+}
+.row{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+}
+.row.top{
+    margin-bottom: 0;
+}
+.row.promos .pill{
+    font-size: 0.7rem;
+    text-align: center;
+    padding: 3px 6px;
+    background: #fcb900;
+    border:1px solid #000;
+    border-radius: 9px;
+}
+.row.promos .pill.discount{
+    color:#FFF;
+    background: #e6356f;
+}
+.row.image{
+    justify-content: center;
+}
+.item.electric{
+    background: url('https://sdk.ct-demos.com/examples/images/leaf.svg') no-repeat;
+    background-size: 100%;
+    background-position: -40px 118px;
+}
+.row.bottom{
+    margin-bottom: 0;
+    justify-content: baseline;
+}
+.row.top div{
+    text-align: left;
+}
+.car-size{
+    color:#333333;
+    font-size: 1.1rem;
+    font-weight: 700;
+}
+.car-name{
+    color:#333333;
+    font-size: .9rem;
+    font-weight: 300;
+}
+.car-name .leaf{
+    width: 25px;
+}
+.info{
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    margin-top: auto;
+}
+.price{
+    text-align: right;
+    font-weight: 800;
+    font-size: 1.2rem;
+    margin-top: auto;
+}
+.price span.strikethrough{
+    display: block;
+    text-align: right;
+    color:#e6356f;
+    font-size: 0.8rem;
+    text-decoration: line-through;
+}
+.price span.perday{
+    display: block;
+    font-size: 0.8rem;
+    font-weight: normal;
+}
+.btn{
+    display: block;
+    padding: 15px;
+    margin: 0px auto;
+    width: 300px;
+    font-size: 15px;
+    background: #00D3A7;
+    color:#000;
+    border:1px solid #000;
+    border-radius: 9px;
+    font-weight: 800;
+    cursor: pointer;
+    transition: box-shadow 200ms ease-in-out, transform 200ms ease-in-out, -webkit-transform 200ms ease-in-out
+}
+.item:hover, .btn:hover{
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 10px, rgba(0, 0, 0, 0.06) 0px 1px 18px, rgba(0, 0, 0, 0.1) 0px 3px 5px -1px;
+}
+.footer{
+    margin: 0;
+}
+    
+@media (min-width: 500px) {
+    .item{
+        width: 50%;
+    }
+}
+@media (min-width: 700px) {
+    .item{ 
+        width: 32%;
+    }
+}
+
+    </style>
+
+  </head>
+  <body>
+
+  <div class="container">
+    <div id="widget">
+      <span class="loader"></span>
+    </div>
+  </div>
+
+   <script src="https://sdk.ct-demos.com/cartrawler.js"></script>
+    <script>
+      
+      let config = {clientID:122070, 
+                    pickupdate:"2024-01-15T10:00:00",
+                    dropoffdate:"2024-01-18T10:00:00",
+                    pickuplocation:"MAD",
+                    dropofflocation:"MAD",
+                    currency:"EUR",
+                    passengers:3,
+                    residency:"IE",
+                    limit:6,
+                    unique:true,
+                    imageWidth:300
+                    // book:true,
+                    // sizes:['premium'],
+                    // suppliers:['hertz'],
+                    // sort:"price",
+                    // debug:true,
+                    // age:32,
+                    // pax:2,
+                    // loyalty:"united"
+                  }
+
+      CarTrawler.getCars(config).then((data) => {
+        
+        if (data.hasOwnProperty('error')){
+          document.getElementById('widget').innerHTML = `<h3>${data.error}</h3>`
+        }
+        else{
+          
+          let template = `
+          <h3 class="heading">Car Hire in ${data.pickupName}</h3>
+          <div class="container">`;
+
+          data.cars.forEach(function(car) {
+            let carBlock = `
+            <div class="item ${car.fuel}">
+              <a href="${car.deeplink}" target="_blank">
+                <div class="row top">
+                    <h3 class="car-size">${car.size}</h3>  
+                    <img class="supplier-logo" src="${car.supplier.image}"/>
+                </div><!-- End top row -->
+                <div class="row">
+                  <h4 class="car-name">${car.name.replace('or similar', '')}</h4>
+                </div>
+                <div class="promos row">
+                    ${(car.offers.length)?'<span class="pill">'+car.offers[0].text+'</span>':'<span></span>'}
+                    ${(car.price.percentageDiscount)?"<span class='pill discount'>"+car.price.percentageDiscount+"% Off</span>":""}
+                </div>
+                <div class="row image">
+                    <img class="car" src="${car.image}"/>
+                </div>
+                <div class="footer row">
+                  <div class="info">
+                  <span><img src="https://sdk.ct-demos.com/examples/images/transmission.svg"/> ${car.transmission}</span>
+                  <span><img src="https://sdk.ct-demos.com/examples/images/pax.svg"/> ${car.seats}</span>
+                  </div>
+                  <div class="gap"></div>
+                  <div class="price">
+                    ${(car.price.strikeThroughAmount)?"<span class='strikethrough'>"+car.price.symbol+""+car.price.strikeThroughAmount+"</span>":""}
+                    ${car.price.symbol}${car.price.total}
+                    <span class="perday">${car.price.symbol}${car.price.day} per day</span>
+                    </div>
+                  
+                </div>
+                </a>
+              </div>
+            `;
+            template += carBlock;
+          });
+
+          template += `
+          </div>
+          
+          <div class="footer">
+            <a class="btn" href="${data.deeplinkURL}" target="_blank">View all cars</a>  
+          </div>`;
+
+          document.getElementById('widget').innerHTML = template;
+
+        }
+      });
+    </script>
+  </body>
+</html>
