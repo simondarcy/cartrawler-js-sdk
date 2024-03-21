@@ -33,8 +33,8 @@ View codepen [here](https://codepen.io/sidarcy/pen/qBQEJbp)
 <script>
   //Retrieve 3 cars in Dublin airport (DUB) for 3 days in January
   let config ={clientID:122070, 
-              pickupdate:"2024-01-15T10:00:00",
-              dropoffdate:"2024-01-18T10:00:00",
+              pickupdate:"2024-10-15T10:00:00",
+              dropoffdate:"2024-10-18T10:00:00",
               pickuplocation:"DUB",
               limit:3
               };
@@ -70,8 +70,8 @@ Retrieve 6 cars in Dallas Forth Worth Airport from Feb 15 to June 18
 
       
 let config ={clientID:122070, 
-              pickupdate:"2024-02-15T10:00:00",
-              dropoffdate:"2024-02-18T10:00:00",
+              pickupdate:"2024-10-15T10:00:00",
+              dropoffdate:"2024-10-18T10:00:00",
               pickuplocation:"DFW",
               limit:6
               };
@@ -99,8 +99,8 @@ Note: The only required paramters are: *clientID*, *pickupLocation*, *pickupDate
 | Option          | Required | Type    | Example                     | Description   |
 |:--------------- | :------: |:------: |:--------------------------- | :------------ |
 | clientID        | Yes      | Int     | 122070                      | Unique partner id provider by CarTrawler        |
-| pickupDate      | Yes      | String  | "2024-02-18T10:00:00"       |   Date and time customer wants to pick up their car        |
-| dropOffDate     | Yes      | String  | "2024-02-18T10:00:00"       |    Date and time customer wants to return their car       |
+| pickupDate      | Yes      | String  | "2024-10-18T10:00:00"       |   Date and time customer wants to pick up their car        |
+| dropOffDate     | Yes      | String  | "2024-10-18T10:00:00"       |    Date and time customer wants to return their car       |
 | pickupLocation  | Yes      | String  | "DUB"                       |   3 letter airport IATA code or GEO Coordinates  of a location    |
 | dropOffLocation | No       | String  | "DUB"                       |    3 letter airport IATA code or GEO Coordinates  of a location.  Defaults to same as pikcup         |
 | currency        | No       | String  | eur                         |    Currency the customer is using to book.Defaults to EUR       |
@@ -193,7 +193,7 @@ Each car object returns the following information
     ],
     "deeplink": "https://partner-whitelabel.cartrawler.com/book?ln=en&pickupDateTime=2023-11-15T10:00:00Z&returnDateTime=2023-11-18T10:00:00Z&age=30&clientID=122070&ct=MP&residenceID=IE&curr=EUR&pickupID=530&&returnID=530&refID=782517946#/vehicles",
     "order": 1,
-    "insruance_widget": "https://ct-demos.com/insurablock/widget.php?clientid=122070&residency=us&currency=usd&country=de&amount=100.20&language=en&startdate=2024-09-26T10:00:00&enddate=2024-09-29T10:00:00",
+    "insruance_widget": "https://ct-demos.com/insurablock/widget.php?clientid=122070&residency=us&currency=usd&country=de&amount=100.20&language=en&startdate=2024-10-26T10:00:00&enddate=2024-10-29T10:00:00",
     "reference": {
         "@Type": "16",
         "@ID": "782517946",
